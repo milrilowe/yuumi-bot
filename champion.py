@@ -7,14 +7,14 @@ class Champion :
     CHAMPION_TWO_X = 1680
     CHAMPION_THREE_X = 1790
     CHAMPION_FOUR_X = 1900
-
+    
     healthX = 0
     healthY = 0
     missingHealth = (0, 0, 0)
 
 
     def __init__(self, pos):     
-        y = self.CHAMPION_ICON_Y
+        self.y = self.CHAMPION_ICON_Y
 
         self.set(pos)
     
@@ -22,7 +22,7 @@ class Champion :
         return self.y
     
     def getX(self):
-        return self.get
+        return self.x
     
     def getPos(self):
         return self.pos
@@ -31,13 +31,15 @@ class Champion :
         self.pos = pos
 
         if pos == 1:
-            x = self.CHAMPION_ONE_X
-        if pos == 2:
-            x = self.CHAMPION_TWO_X
-        if pos == 3:
-            x = self.CHAMPION_THREE_X
-        if pos == 4:
-            x = self.CHAMPION_FOUR_X
+            self.x = self.CHAMPION_ONE_X
+        elif pos == 2:
+            self.x = self.CHAMPION_TWO_X
+        elif pos == 3:
+            self.x = self.CHAMPION_THREE_X
+        elif pos == 4:
+            self.x = self.CHAMPION_FOUR_X
+        else:
+            self.x = None
     
     def isMissingHealth(self):
         if convert.toRGB(self.healthX, self.healthY) == self.missingHealth:

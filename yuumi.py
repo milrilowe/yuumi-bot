@@ -88,7 +88,7 @@ class Yuumi:
 
     def attach(self):
         if self.hasW(): 
-                ahk.mouse_move(self.champion.getX, self.champion.getY)
+                ahk.mouse_move(self.champion.getX(), self.champion.getY())
                 ahk.key_press(key = 'w')
 
     #Heal
