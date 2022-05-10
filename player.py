@@ -1,35 +1,20 @@
 import time
 import yuumi
+import main
 
 #This shouldn't have any coordinate or pixel values.  It should pretty much be all in English e.g. if yuumi.hasW : yuumi.attach etc.
 
 yuumi = yuumi.Yuumi()
 
-#Init shop
-    #Dark Seal
-    #2x Control Wards
-    #Sweeper
-yuumi.initShop()
-
-
-while True:
+while main.inGame():
     if(not yuumi.isAttached()):
-        #shop()
-        yuumi.attach(3)
+        yuumi.initShop()
+        yuumi.attach()
+        while(not yuumi.isAttached()):
+            time.sleep(1)
 
     if(yuumi.isAttached()):
         yuumi.heal()
-    
-    if(yuumi.hasQ()):
-        print('Q')
-        break
-        #attached logic 
+        yuumi.levelUp()
 
-
-#Some kind of loop
-    #Attach
-    #Heal
-        #Check HP
-    #Level abilities
-    #Shop
-    
+print('Q')

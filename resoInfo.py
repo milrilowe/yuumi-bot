@@ -1,5 +1,5 @@
 import pyautogui as auto
-import time, keyboard
+import time
 import yuumi
 from ahk import AHK
 
