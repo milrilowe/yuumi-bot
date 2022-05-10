@@ -18,15 +18,17 @@ class Yuumi:
         self.D_X_COORD = 1025
         self.F_X_COORD = 1075
         self.Q_RGB = (236, 183, 21)
-        self.W_RGB = (49, 26, 135)
-        self.W_ATTACHED_RGB = (21, 98, 181)
+        self.W_RGB = (49, 26, 135)          #Color of W while yuumi is unattached to someone
+        self.W_ATTACHED_RGB = (21, 98, 181) #Color of W while yuumi is attached to someone
         self.E_RGB = (8, 115, 96)
         self.R_RGB = (118, 52, 173)
         self.D_RGB = (28, 16, 4)
         self.F_RGB = (239, 212, 119)
 
         #These are all the necessary x,y coordinates as well as RGB values of items -- OR DOES IT EVEN BELONG HERE?!
-        #TBA
+        self.INIT_DARKSEAL_X = 365
+        self.INIT_Y = 410
+        self.INIT_CONTROLWARD_X = 419
 
         #These are all the necessary x,y coordinates of teammates' icons
         self.CHAMPION_ICON_Y = 600
@@ -84,8 +86,6 @@ class Yuumi:
         return self.ward
 
     #Status
-
-
     def hasQ(self):
         if(auto.pixel(self.Q_X_COORD, self.ABILITY_Y_COORD) == self.Q_RGB) :
             return True
@@ -109,8 +109,6 @@ class Yuumi:
     def hasD(self):
         if(auto.pixel(self.D_X_COORD, self.ABILITY_Y_COORD) == self.D_RGB) :
             return True
-        print(str(auto.pixel(self.D_X_COORD, self.ABILITY_Y_COORD)))
-        print(str(self.D_RGB))
         return False
     
     def hasF(self):
@@ -121,11 +119,18 @@ class Yuumi:
 
     #Shop
     
-    def buyInit():
-        print()
+    def initShop(self):
+        keyboard.press_and_release('p')
+        time.sleep(1)
+        auto.doubleClick( x = self.INIT_DARKSEAL_X, y = self.INIT_Y)
+        auto.doubleClick()
+        time.sleep(1)
+        auto.doubleClick( x = self.INIT_CONTROLWARD_X, y = self.INIT_Y)
+        auto.doubleClick()
 
     #Heal
-
+        def heal(self):
+            pass
     #Attach/Detach
     def isAttached(self):
         if auto.pixel(self.Q_X_COORD, self.ABILITY_Y_COORD) == self.W_ATTACHED_RGB:
@@ -133,5 +138,5 @@ class Yuumi:
         return False
 
     def attach(self): #Will need a second parameter to determine which teammate
-        auto.moveTo(1570, 600)
+        auto.moveTo(self.CHAMPION_THREE_X, self.CHAMPION_ICON_Y)
         keyboard.press_and_release('w')
