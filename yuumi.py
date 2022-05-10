@@ -1,6 +1,8 @@
 from contextlib import nullcontext
 from types import WrapperDescriptorType
 import pyautogui as auto
+import keyboard, time
+
 class Yuumi:
 
     def __init__(self):
@@ -17,6 +19,7 @@ class Yuumi:
         self.F_X_COORD = 1075
         self.Q_RGB = (236, 183, 21)
         self.W_RGB = (49, 26, 135)
+        self.W_ATTACHED_RGB = (21, 98, 181)
         self.E_RGB = (8, 115, 96)
         self.R_RGB = (118, 52, 173)
         self.D_RGB = (28, 16, 4)
@@ -24,6 +27,13 @@ class Yuumi:
 
         #These are all the necessary x,y coordinates as well as RGB values of items -- OR DOES IT EVEN BELONG HERE?!
         #TBA
+
+        #These are all the necessary x,y coordinates of teammates' icons
+        self.CHAMPION_ICON_Y = 600
+        self.CHAMPION_ONE_X = 1570
+        self.CHAMPION_TWO_X = 1680
+        self.CHAMPION_THREE_X = 1790
+        self.CHAMPION_FOUR_X = 1900
 
         pass
 
@@ -113,4 +123,15 @@ class Yuumi:
     
     def buyInit():
         print()
+
     #Heal
+
+    #Attach/Detach
+    def isAttached(self):
+        if auto.pixel(self.Q_X_COORD, self.ABILITY_Y_COORD) == self.W_ATTACHED_RGB:
+            return True
+        return False
+
+    def attach(self): #Will need a second parameter to determine which teammate
+        auto.moveTo(1570, 600)
+        keyboard.press_and_release('w')
