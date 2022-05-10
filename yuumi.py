@@ -42,32 +42,32 @@ class Yuumi:
 
     #Status
     def hasQ(self):
-        if(convert.toRGB(self, self.Q_X_COORD, self.ABILITY_Y_COORD) == self.Q_RGB) :
+        if(convert.toRGB(self.Q_X_COORD, self.ABILITY_Y_COORD) == self.Q_RGB) :
             return True 
         return False
 
     def hasW(self):
-        if(convert.toRGB(self, self.W_X_COORD, self.ABILITY_Y_COORD) == self.W_RGB) :
+        if(convert.toRGB(self.W_X_COORD, self.ABILITY_Y_COORD) == self.W_RGB) :
             return True
         return False
 
     def hasE(self):
-        if(convert.toRGB(self, self.E_X_COORD, self.ABILITY_Y_COORD) == self.E_RGB) :
+        if(convert.toRGB(self.E_X_COORD, self.ABILITY_Y_COORD) == self.E_RGB) :
             return True
         return False
 
     def hasR(self):
-        if(convert.toRGB(self, self.R_X_COORD, self.ABILITY_Y_COORD) == self.R_RGB) :
+        if(convert.toRGB(self.R_X_COORD, self.ABILITY_Y_COORD) == self.R_RGB) :
             return True
         return False
 
     def hasD(self):
-        if(convert.toRGB(self, self.D_X_COORD, self.ABILITY_Y_COORD) == self.D_RGB) :
+        if(convert.toRGB(self.D_X_COORD, self.ABILITY_Y_COORD) == self.D_RGB) :
             return True
         return False
     
     def hasF(self):
-        if(convert.toRGB(self, self.F_X_COORD, self.ABILITY_Y_COORD) == self.F_RGB) :
+        if(convert.toRGB(self.F_X_COORD, self.ABILITY_Y_COORD) == self.F_RGB) :
             return True
         return False
 
@@ -82,7 +82,7 @@ class Yuumi:
 
     #Attach/Detach
     def isAttached(self):
-        if convert.toRGB(self, self.W_X_COORD, self.ABILITY_Y_COORD) == self.W_ATTACHED_RGB:
+        if convert.toRGB(self.W_X_COORD, self.ABILITY_Y_COORD) == self.W_ATTACHED_RGB:
             return True
         return False
 

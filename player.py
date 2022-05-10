@@ -12,6 +12,7 @@ while main.inGame():
         yuumi.attach()
         while(not yuumi.isAttached()):
             time.sleep(1)
+            print('sleeping')
 
     if(yuumi.isAttached()):
         yuumi.heal()
