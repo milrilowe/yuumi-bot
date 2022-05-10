@@ -1,13 +1,33 @@
 from contextlib import nullcontext
 from types import WrapperDescriptorType
-
+import pyautogui as auto
 class Yuumi:
 
     def __init__(self):
         self.itemOne = self.itemTwo = self.itemThree = self.itemFour = self.itemFive = self.itemSix = self.ward = None
+
+        #These are all the necessary x,y coordinates as well as RGB values of abilities and summoner spells
+        self.ABILITY_Y_COORD = 975
+        self.SUMMONER_Y_COORD = 975
+        self.Q_X_COORD = 762
+        self.W_X_COORD = 828
+        self.E_X_COORD = 893
+        self.R_X_COORD = 959
+        self.D_X_COORD = 1025
+        self.F_X_COORD = 1075
+        self.Q_RGB = (236, 183, 21)
+        self.W_RGB = (49, 26, 135)
+        self.E_RGB = (8, 115, 96)
+        self.R_RGB = (118, 52, 173)
+        self.D_RGB = (28, 16, 4)
+        self.F_RGB = (239, 212, 119)
+
+        #These are all the necessary x,y coordinates as well as RGB values of items -- OR DOES IT EVEN BELONG HERE?!
+        #TBA
+
         pass
 
-    #Setters -- These will have to be incredibly complex actually.......
+    #Setters -- These will have to be incredibly complex actually - will involve buying from shop!.......
 
     def setItemOne(self, itemOne):
         self.itemOne = itemOne
@@ -30,7 +50,7 @@ class Yuumi:
     def setWard(self, ward):
         self.ward = ward
 
-    #Getters
+    #Getters -- Need to eventually add like, a dictionary so convert RGB into actual item objects
 
     def getItemOne(self):
         return self.itemOne
@@ -55,22 +75,37 @@ class Yuumi:
 
     #Status
 
-    def hasQ():
+
+    def hasQ(self):
+        if(auto.pixel(self.Q_X_COORD, self.ABILITY_Y_COORD) == self.Q_RGB) :
+            return True
         return False
 
-    def hasW():
+    def hasW(self):
+        if(auto.pixel(self.W_X_COORD, self.ABILITY_Y_COORD) == self.W_RGB) :
+            return True
         return False
 
-    def hasE():
+    def hasE(self):
+        if(auto.pixel(self.E_X_COORD, self.ABILITY_Y_COORD) == self.E_RGB) :
+            return True
         return False
 
-    def hasR():
+    def hasR(self):
+        if(auto.pixel(self.R_X_COORD, self.ABILITY_Y_COORD) == self.R_RGB) :
+            return True
         return False
 
-    def hasD():
+    def hasD(self):
+        if(auto.pixel(self.D_X_COORD, self.ABILITY_Y_COORD) == self.D_RGB) :
+            return True
+        print(str(auto.pixel(self.D_X_COORD, self.ABILITY_Y_COORD)))
+        print(str(self.D_RGB))
         return False
     
-    def hasF():
+    def hasF(self):
+        if(auto.pixel(self.F_X_COORD, self.ABILITY_Y_COORD) == self.F_RGB) :
+            return True
         return False
     
 
