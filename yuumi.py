@@ -8,7 +8,7 @@ class Yuumi:
         pass
 
     #Setters -- These will have to be incredibly complex actually.......
-    
+
     def setItemOne(self, itemOne):
         self.itemOne = itemOne
 
@@ -67,12 +67,15 @@ class Yuumi:
     def hasR():
         return False
 
+    def hasD():
+        return False
+    
+    def hasF():
+        return False
+    
+
     #Shop
     
+    def buyInit():
+        print()
     #Heal
-
-        
-        
-        
-        
-
