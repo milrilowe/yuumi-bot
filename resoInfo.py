@@ -6,9 +6,6 @@ win = auto.getActiveWindow()
 #topleft of window
 initX = win.topleft.x
 initY = win.topleft.y
-#Titlebar - this is the topLeft of playable screen
-addX = 8 + initX #Need to find a way to get this number for all comps - but it works for now
-addY = 32 + initY #Need to find a way to get this number for all comps- but it works for now
 
 itemOneX, itemOneY = 623, 703
 itemTwoX, itemTwoY = 649, 703
@@ -21,12 +18,10 @@ ward = 1,2
 
 try:
     while True:
-
-
         x, y = auto.position()
-        r,g,b = auto.pixel(x, itemOneY + addY)
+        r,g,b = auto.pixel(x, y)
 
-        strRGB = 'x: ' + str(x - addX) + ' r: ' + str(r).rjust(4) + ' g: ' + str(g).rjust(4) + ' b: ' + str(b).rjust(4)
+        strRGB = 'x: ' + str(x - initX) + 'y: ' + str(y - initY) + ' r: ' + str(r).rjust(4) + ' g: ' + str(g).rjust(4) + ' b: ' + str(b).rjust(4)
 
         
         print(strRGB)
