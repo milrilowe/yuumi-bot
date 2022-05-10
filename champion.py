@@ -3,14 +3,17 @@ import convert
 class Champion :
 
     CHAMPION_ICON_Y = 600
+    HEALTH_Y = 631
     CHAMPION_ONE_X = 1570
     CHAMPION_TWO_X = 1680
     CHAMPION_THREE_X = 1790
     CHAMPION_FOUR_X = 1900
-    
-    healthX = 0
-    healthY = 0
-    missingHealth = (0, 0, 0)
+    HEALTH_ONE_X = 1613
+    HEALTH_TWO_X = 1710
+    HEALTH_THREE_X = 1807
+    HEALTH_FOUR_X = 1904
+
+    missingHealth = (16, 16, 16)
 
 
     def __init__(self, pos):     
