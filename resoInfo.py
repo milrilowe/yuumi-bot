@@ -5,10 +5,6 @@ from ahk import AHK
 
 ahk = AHK()
 
-
-
-
-
 time.sleep(2)
 
 yuumi = yuumi.Yuumi()
@@ -51,7 +47,7 @@ else:
 try:
     while True:
         x, y = auto.position()
-        rgb = ahk.pixel_get_color(x, y)
+        rgb = ahk.pixel_get_color(x, 1057)
         rgb = rgb[2:]
         r, g, b = tuple(int(rgb[i:i+2], 16) for i in (0, 2, 4))
         positionStr = 'X: ' + str(x).rjust(4) + ' Y: ' + str(y).rjust(4) + ' R: ' + str(r).rjust(4) + ' G: ' + str(g).rjust(4) + ' B: ' +str(b).rjust(4)
@@ -59,5 +55,3 @@ try:
         print('\b' * len(positionStr), end='', flush=True)
 except KeyboardInterrupt:
     print('\n')
-
-

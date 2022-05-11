@@ -4,28 +4,31 @@ class Champion :
 
     CHAMPION_ICON_Y = 600
     HEALTH_Y = 631
+
+    #Icon x values
     CHAMPION_ONE_X = 1570
     CHAMPION_TWO_X = 1680
     CHAMPION_THREE_X = 1790
     CHAMPION_FOUR_X = 1900
+
+    #Health bar x values (last pixel of green)
     HEALTH_ONE_X = 1613
     HEALTH_TWO_X = 1710
     HEALTH_THREE_X = 1807
     HEALTH_FOUR_X = 1904
 
-    missingHealth = (16, 16, 16)
+    missingHealth_RGB = (16, 16, 16)
+
 
 
     def __init__(self, pos):     
-        self.y = self.CHAMPION_ICON_Y
-
         self.set(pos)
     
     def getY(self):
-        return self.y
+        return self.icon[1]
     
     def getX(self):
-        return self.x
+        return self.icon[0]
     
     def getPos(self):
         return self.pos
@@ -34,18 +37,22 @@ class Champion :
         self.pos = pos
 
         if pos == 1:
-            self.x = self.CHAMPION_ONE_X
+            self.icon = (self.CHAMPION_ONE_X, self.CHAMPION_ICON_Y)
+            self.missingHealth = (self.HEALTH_ONE_X, self.HEALTH_Y)
         elif pos == 2:
-            self.x = self.CHAMPION_TWO_X
+            self.icon = (self.CHAMPION_ONE_X, self.CHAMPION_ICON_Y)
+            self.missingHealth = (self.HEALTH_TWO_X, self.HEALTH_Y)
         elif pos == 3:
-            self.x = self.CHAMPION_THREE_X
+            self.icon = (self.CHAMPION_ONE_X, self.CHAMPION_ICON_Y)
+            self.missingHealth = (self.HEALTH_THREE_X, self.HEALTH_Y)
         elif pos == 4:
-            self.x = self.CHAMPION_FOUR_X
+            self.icon = (self.CHAMPION_ONE_X, self.CHAMPION_ICON_Y)
+            self.missingHealth = (self.HEALTH_FOUR_X, self.HEALTH_Y)
         else:
             self.x = None
+            self.healthX = None
     
     def isMissingHealth(self):
-        if convert.toRGB(self.healthX, self.healthY) == self.missingHealth:
+        if convert.toRGB(self.missingHealth) == self.missingHealth_RGB:
             return True
         return False
-    
