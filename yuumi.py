@@ -4,6 +4,7 @@ from ahk import AHK
 import convert
 import champion
 import time
+import items
 
 ahk = AHK()
 
@@ -11,6 +12,10 @@ class Yuumi:
 
     def __init__(self):
         self.champion = champion.Champion(1) #Who Yuumi attaches herself to - initialized as '3' bc the adc is generally the 3rd portrait
+
+
+        #self.toBuy = [items.controlWard, items.darkSeal, items.mikael, items.mejai, items.staff, items.chemtech, items.ardent]
+
 
         #These are all the necessary x,y coordinates as well as RGB values of abilities and summoner spells
         self.ABILITY_Y_COORD = 975
@@ -24,6 +29,7 @@ class Yuumi:
         self.ISINSHOP_Y = 1057
         self.ISINSHOP_X = 1129
         
+        self.P_X_COORD = 770
         self.Q_X_COORD = 762
         self.W_X_COORD = 828
         self.E_X_COORD = 893
@@ -31,6 +37,7 @@ class Yuumi:
         self.D_X_COORD = 1025
         self.F_X_COORD = 1075
 
+        self.P = (self.P_X_COORD, self.ABILITY_Y_COORD)
         self.Q = (self.Q_X_COORD, self.ABILITY_Y_COORD)
         self.W = (self.W_X_COORD, self.ABILITY_Y_COORD)
         self.E = (self.E_X_COORD, self.ABILITY_Y_COORD)
@@ -50,7 +57,7 @@ class Yuumi:
         self.ISINSHOP = (self.ISINSHOP_X, self.ISINSHOP_Y)
 
         
-        
+        self.P_RGB = (54, 100, 228)
         self.Q_RGB = (251, 223, 69)         #Color changes when unattached - this is attached
         self.W_RGB = (49, 26, 135)          #Color of W while yuumi is unattached to someone
         self.W_ATTACHED_RGB = (21, 98, 181) #Color of W while yuumi is attached to someone
@@ -79,6 +86,11 @@ class Yuumi:
         self.closeShop()
 
     #Status of abilities
+    def hasP(self):
+        if(convert.toRGB(self.P) == self.P_RGB) :
+            return True 
+        return False
+        
     def hasQ(self):
         if(convert.toRGB(self.Q) == self.Q_RGB) :
             return True 
