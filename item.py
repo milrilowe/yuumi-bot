@@ -1,68 +1,45 @@
+import itemComponent as item
 import enum
 
-Y1 = 266
-Y2 = 388
-Y3 = 505
-
-X1 = 921
-X2 = 978
-X3 = 1036
-X4 = 1093
-X5 = 1151
-
-DARK_SEAL_COORD = (X1, Y1)
-CONTROL_WARD_COORD = (X2, Y1)
-FAERIE_CHARM_COORD = (X3, Y1)
-NULL_MAGIC_MANTLE_COORD = (X4, Y1)
-AMP_TOME_COORD = (X5, Y1)
-
-OBLIVION_ORB_COORD = (X1, Y2)
-BANDLEGLASS_MIRROR_COORD = (X2, Y2)
-FORBIDDON_IDOL_COORD = (X3, Y2)
-NEGATRON_CLOAK_COORD = (X4, Y2)
-
-MIKAELS_BLESSING_COORD = (X1, Y3)
-MEJAIS_COORD = (X2, Y3)
-STAFF_OF_FLOWING_WATER_COORD = (X3, Y3)
-CHEMTECH_PUTRIFIER_COORD = (X4, Y3)
-ARDENT_CENSER_COORD = (X5, Y3)
-
-DARK_SEAL_RGB = (79, 55, 125)
-CONTROL_WARD_RGB = (123, 88, 80)
-FAERIE_CHARM_RGB = (39, 100, 164)
-NULL_MAGIC_MANTLE_RGB = (115, 83, 16)
-AMP_TOME_RGB = (217, 150, 95)
-
-OBLIVION_ORB_RGB = (104, 181, 80)
-BANDLEGLASS_MIRROR_RGB = (155, 170, 137)
-FORBIDDON_IDOL_RGB = (167, 43, 151)
-NEGATRON_CLOAK_RGB = (107, 76, 121)
-
-MIKAELS_BLESSING_RGB = (66, 19, 8)
-MEJAIS_RGB = (175, 154, 158)
-STAFF_OF_FLOWING_WATER_RGB = (115, 243, 247)
-CHEMTECH_PUTRIFIER_RGB = (65, 64, 45)
-ARDENT_CENSER_RGB = (32, 83, 77)
-
-class Item (enum.Enum):
+class Items (enum.Enum):
     
-    darkSeal = DARK_SEAL_COORD, DARK_SEAL_RGB
-    controlWard = CONTROL_WARD_COORD, CONTROL_WARD_RGB
-    faerieCharm = FAERIE_CHARM_COORD, FAERIE_CHARM_RGB
-    nullMagicMantle = NULL_MAGIC_MANTLE_COORD, NULL_MAGIC_MANTLE_RGB
-    ampTome = AMP_TOME_COORD, AMP_TOME_RGB
+    DARK_SEAL = [item.darkSeal]
+    CONTROL_WARD = [item.controlWard]
+    FAERIE_CHARM = [item.faerieCharm]
+    NULL_MAGIC_MANTLE = [item.nullMagicMantle]
+    AMP_TOME = [item.ampTome]
+
+    OBLIVION_ORB = [AMP_TOME, item.oblivionOrb]
+    BANDLEGLASS_MIRROR = [FAERIE_CHARM, AMP_TOME, item.bandleglassMirror]
+    FORBIDDEN_IDOL = [FAERIE_CHARM, item.forbiddenIdol]
+    NEGATRON_CLOAK = [AMP_TOME, item.negatronCloak]
+
+
     
-    oblivionOrb = OBLIVION_ORB_COORD, OBLIVION_ORB_RGB
-    bandleGlassMirror = BANDLEGLASS_MIRROR_COORD, BANDLEGLASS_MIRROR_RGB
-    forbiddenIdol = FORBIDDON_IDOL_COORD, FORBIDDON_IDOL_RGB
-    negatronCloak = NEGATRON_CLOAK_COORD, NEGATRON_CLOAK_RGB
+    MIKAELSBLESSING = [FORBIDDEN_IDOL, NEGATRON_CLOAK, item.mikaelsBlessing]
+    MEJAIS = [DARK_SEAL, item.mejais]
+    STAFF_OF_FLOWING_WATER = [FORBIDDEN_IDOL, AMP_TOME, AMP_TOME, item.staffOfFlowingWater]
+    CHEMTECH_PUTRIFIER = [OBLIVION_ORB, item.chemtechPutrifier]
+    ARDENT_CENSER = [FORBIDDEN_IDOL, AMP_TOME, AMP_TOME, item.ardentCenser]
 
-    mikael = MIKAELS_BLESSING_COORD, MIKAELS_BLESSING_RGB
-    mejai = MEJAIS_COORD, MEJAIS_RGB
-    staff = STAFF_OF_FLOWING_WATER_COORD, STAFF_OF_FLOWING_WATER_RGB
-    chemtech = CHEMTECH_PUTRIFIER_COORD, CHEMTECH_PUTRIFIER_RGB
-    ardent = ARDENT_CENSER_COORD, ARDENT_CENSER_RGB
 
-if __name__=="__main__":
-    for item in Item:
-        print(item.value)
+
+    def __init__(self, item):
+        self.components = []
+        self.item = item
+    
+    def idk(self):
+        if self.item == self.darkSeal:
+            pass
+        elif self.item == self.Mikael:
+            #Instead of each compenent, should be another Item object
+            self.component.push(self.faerieCharm) 
+            self.component.push(self.forbiddenIdol)
+            self.component.push(self.NullMagicMantle)
+            #self.component.push(self.Negatron Cloak)
+
+    
+
+    
+
+
