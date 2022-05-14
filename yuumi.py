@@ -1,98 +1,98 @@
-import re
 from ahk import AHK
 
 import convert
 import champion
 import time
-import items
+from itemSet import ItemSet
+from itemComponents import ItemComponents as Component
 
 ahk = AHK()
 
+
 class Yuumi:
 
-    def __init__(self):
-        self.champion = champion.Champion(1) #Who Yuumi attaches herself to - initialized as '3' bc the adc is generally the 3rd portrait
+    #These are all the necessary x,y coordinates as well as RGB values of abilities and summoner spells
+    ABILITY_Y_COORD = 975
+    LEVELUP_Y_COORD = 922
+    SUMMONER_Y_COORD = 975
+    HEALTH_Y_COORD = 1040
+    MANA_Y_COORD = 1060
 
+    HEALTH_MANA_X = 1094
 
-        #self.toBuy = [items.controlWard, items.darkSeal, items.mikael, items.mejai, items.staff, items.chemtech, items.ardent]
-
-
-        #These are all the necessary x,y coordinates as well as RGB values of abilities and summoner spells
-        self.ABILITY_Y_COORD = 975
-        self.LEVELUP_Y_COORD = 922
-        self.SUMMONER_Y_COORD = 975
-        self.HEALTH_Y_COORD = 1040
-        self.MANA_Y_COORD = 1060
-
-        self.HEALTH_MANA_X = 1094
-
-        self.ISINSHOP_Y = 1057
-        self.ISINSHOP_X = 1129
-        
-        self.P_X_COORD = 770
-        self.Q_X_COORD = 762
-        self.W_X_COORD = 828
-        self.E_X_COORD = 893
-        self.R_X_COORD = 958
-        self.D_X_COORD = 1025
-        self.F_X_COORD = 1075
-
-        self.P = (self.P_X_COORD, self.ABILITY_Y_COORD)
-        self.Q = (self.Q_X_COORD, self.ABILITY_Y_COORD)
-        self.W = (self.W_X_COORD, self.ABILITY_Y_COORD)
-        self.E = (self.E_X_COORD, self.ABILITY_Y_COORD)
-        self.R = (self.R_X_COORD, self.ABILITY_Y_COORD)
-
-        self.D = (self.D_X_COORD, self.SUMMONER_Y_COORD)
-        self.F = (self.F_X_COORD, self.SUMMONER_Y_COORD)
-
-        self.LEVEL_Q = (self.Q_X_COORD, self.LEVELUP_Y_COORD)
-        self.LEVEL_W = (self.W_X_COORD, self.LEVELUP_Y_COORD)
-        self.LEVEL_E = (self.E_X_COORD, self.LEVELUP_Y_COORD)
-        self.LEVEL_R = (self.R_X_COORD, self.LEVELUP_Y_COORD)
-
-        self.FULLHEALTH = (self.HEALTH_MANA_X, self.HEALTH_Y_COORD)
-        self.FULLMANA = (self.HEALTH_MANA_X, self.MANA_Y_COORD)
-
-        self.ISINSHOP = (self.ISINSHOP_X, self.ISINSHOP_Y)
-
-        
-        self.P_RGB = (54, 100, 228)
-        self.Q_RGB = (251, 223, 69)         #Color changes when unattached - this is attached
-        self.W_RGB = (49, 26, 135)          #Color of W while yuumi is unattached to someone
-        self.W_ATTACHED_RGB = (21, 98, 181) #Color of W while yuumi is attached to someone
-        self.E_RGB = (8, 115, 96)
-        self.R_RGB = (127, 58, 177)
-        self.D_RGB = (28, 16, 4)            #Exhaust - will need an init to determine in future in case we want a different summoner
-        self.F_RGB = (239, 212, 119)        #Ignite - will need an init to determine in future in case we want a different summoner
-
-        self.LEVELUP_RGB = (33, 36, 33) #If can level, this pixel is this color
-
-        self.FULL_RGB = (192, 525, 250)
-
-        self.ISINSHOP_RGB = (183, 159, 87)
-
-        #These are all the necessary x,y coordinates as well as RGB values of items -- OR DOES IT EVEN BELONG HERE?!
-        self.INIT_Y = 543
-        self.INIT_DARKSEAL_X = 933
-        self.INIT_CONTROLWARD_X = 985
+    ISINSHOP_Y = 1057
+    ISINSHOP_X = 1129
     
-    #Init Shop
-    def initShop(self):
-        self.openShop()
-        self.buyDarkSeal()
-        self.buyControlWard()
-        self.buyControlWard()
-        self.closeShop()
+    P_X_COORD = 770
+    Q_X_COORD = 762
+    W_X_COORD = 828
+    E_X_COORD = 893
+    R_X_COORD = 958
+    D_X_COORD = 1025
+    F_X_COORD = 1075
+
+    P = (P_X_COORD, ABILITY_Y_COORD)
+    Q = (Q_X_COORD, ABILITY_Y_COORD)
+    W = (W_X_COORD, ABILITY_Y_COORD)
+    E = (E_X_COORD, ABILITY_Y_COORD)
+    R = (R_X_COORD, ABILITY_Y_COORD)
+
+    D = (D_X_COORD, SUMMONER_Y_COORD)
+    F = (F_X_COORD, SUMMONER_Y_COORD)
+
+    LEVEL_Q = (Q_X_COORD, LEVELUP_Y_COORD)
+    LEVEL_W = (W_X_COORD, LEVELUP_Y_COORD)
+    LEVEL_E = (E_X_COORD, LEVELUP_Y_COORD)
+    LEVEL_R = (R_X_COORD, LEVELUP_Y_COORD)
+
+    FULLHEALTH = (HEALTH_MANA_X, HEALTH_Y_COORD)
+    FULLMANA = (HEALTH_MANA_X, MANA_Y_COORD)
+
+    ISINSHOP = (ISINSHOP_X, ISINSHOP_Y)
+
+    
+    P_RGB = (54, 100, 228)
+    Q_RGB = (251, 223, 69)         #Color changes when unattached - this is attached
+    W_RGB = (49, 26, 135)          #Color of W while yuumi is unattached to someone
+    W_ATTACHED_RGB = (21, 98, 181) #Color of W while yuumi is attached to someone
+    E_RGB = (8, 115, 96)
+    R_RGB = (127, 58, 177)
+    D_RGB = (28, 16, 4)            #Exhaust - will need an init to determine in future in case we want a different summoner
+    F_RGB = (239, 212, 119)        #Ignite - will need an init to determine in future in case we want a different summoner
+
+    LEVELUP_RGB = (33, 36, 33) #If can level, this pixel is this color
+
+    FULL_RGB = (192, 525, 250)
+
+    ISINSHOP_RGB = (183, 159, 87)
+
+    toBuy = []
+
+    def __init__(self):
+        self.champion = champion.Champion(3) #Who Yuumi attaches herself to - initialized as '3' bc the adc is generally the 3rd portrait
+
+        def setToBuy(list):
+            itemSet = list
+
+            for i in itemSet:
+                if not type(i) == Component:
+                        setToBuy(i)          
+                else:
+                    self.toBuy.append(i)
+
+        setToBuy(ItemSet.itemSet)
+        
+        for i in self.toBuy:
+            print(i)
 
     #Status of abilities
     def hasP(self):
         if(convert.toRGB(self.P) == self.P_RGB) :
             return True 
         return False
-        
+
     def hasQ(self):
-        if(convert.toRGB(self.Q) == self.Q_RGB) :
+        if(convert.toRGB(self.Q) == self.Q_RGB):
             return True 
         return False
 
@@ -132,18 +132,20 @@ class Yuumi:
         return False
 
     #Shop
-    def inShop(self):
-        if convert.toRGB(self.ISINSHOP) == self.ISINSHOP_RGB:
-            return True
-        return False
+    def shop(self):
+        self.openShop()
+        for component in list(self.toBuy):
+            time.sleep(0.1)
+            if self.canPurchase(component):
+                print('purchased ' + component.name)
+                self.purchase(component)
+            else:
+                print('cannot buy ' + component.name)
+                for j in self.toBuy:
+                    print (j)
+                self.closeShop()
+                break
 
-    def buyDarkSeal(self):
-        if(self.isShopOpen):
-            ahk.right_click(self.INIT_DARKSEAL_X, self.INIT_Y)
-    
-    def buyControlWard(self):
-        if(self.isShopOpen):
-            ahk.right_click(self.INIT_CONTROLWARD_X, self.INIT_Y)
 
     #Attach/Detach
     def isAttached(self):
@@ -153,10 +155,9 @@ class Yuumi:
 
     def attach(self):
         if self.hasW(): 
-                ahk.mouse_move(self.champion.getX(), self.champion.getY())
-                ahk.key_press(key = 'w')
-        while not self.isAttached():
-            time.sleep(1)
+            ahk.mouse_move(self.champion.getX(), self.champion.getY())
+            ahk.key_press(key = 'w')
+            
 
     #Heal
     def heal(self):
@@ -189,6 +190,19 @@ class Yuumi:
     def closeShop(self):
         ahk.key_press(key = 'p')
 
-    def isShopOpen(self):
-        #add check
-        return True
+    def purchase(self, component):
+        ahk.right_click(component.coord)
+        ahk.mouse_move(0,0) #Prevents mouse from triggering drop-down that covers items
+        self.toBuy.remove(component)
+
+    def canPurchase(self, component):
+        return convert.toRGB(component.coord) == component.rgb
+
+    def inShop(self):
+        if convert.toRGB(self.ISINSHOP) == self.ISINSHOP_RGB:
+            return True
+        return False
+        
+    
+
+

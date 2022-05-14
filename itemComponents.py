@@ -1,4 +1,4 @@
-import enum
+from enum import Enum
 
 Y1 = 266
 Y2 = 388
@@ -44,8 +44,8 @@ STAFF_OF_FLOWING_WATER_RGB = (115, 243, 247)
 CHEMTECH_PUTRIFIER_RGB = (65, 64, 45)
 ARDENT_CENSER_RGB = (32, 83, 77)
 
-class Item (enum.Enum):
-    
+class ItemComponents (Enum):
+
     darkSeal = DARK_SEAL_COORD, DARK_SEAL_RGB
     controlWard = CONTROL_WARD_COORD, CONTROL_WARD_RGB
     faerieCharm = FAERIE_CHARM_COORD, FAERIE_CHARM_RGB
@@ -57,12 +57,12 @@ class Item (enum.Enum):
     forbiddenIdol = FORBIDDON_IDOL_COORD, FORBIDDON_IDOL_RGB
     negatronCloak = NEGATRON_CLOAK_COORD, NEGATRON_CLOAK_RGB
 
-    mikael = MIKAELS_BLESSING_COORD, MIKAELS_BLESSING_RGB
-    mejai = MEJAIS_COORD, MEJAIS_RGB
-    staff = STAFF_OF_FLOWING_WATER_COORD, STAFF_OF_FLOWING_WATER_RGB
-    chemtech = CHEMTECH_PUTRIFIER_COORD, CHEMTECH_PUTRIFIER_RGB
-    ardent = ARDENT_CENSER_COORD, ARDENT_CENSER_RGB
+    mikaelsBlessing = MIKAELS_BLESSING_COORD, MIKAELS_BLESSING_RGB
+    mejais = MEJAIS_COORD, MEJAIS_RGB
+    staffOfFlowingWater = STAFF_OF_FLOWING_WATER_COORD, STAFF_OF_FLOWING_WATER_RGB
+    chemtechPutrifier = CHEMTECH_PUTRIFIER_COORD, CHEMTECH_PUTRIFIER_RGB
+    ardentCenser = ARDENT_CENSER_COORD, ARDENT_CENSER_RGB
 
-if __name__=="__main__":
-    for item in Item:
-        print(item.value)
+    def __init__(self, coord, rgb):
+        self.coord = coord
+        self.rgb = rgb

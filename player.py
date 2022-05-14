@@ -7,14 +7,21 @@ time.sleep(2)
 
 yuumi = yuumi.Yuumi()
 
-while main.inGame:
-    if(not yuumi.isAttached()):
-        yuumi.initShop()
-        yuumi.attach()
+while True:
+    time.sleep(2)
 
-    else:
-        print('attached')
+    if yuumi.inShop() :
+        yuumi.shop()
+
+    yuumi.attach()
+
+    while(yuumi.isAttached()):
         yuumi.heal()
         yuumi.levelUp()
+        
+
+
+
+    
 
 print('Q')
