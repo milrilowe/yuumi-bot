@@ -5,6 +5,19 @@ import champion
 import time
 from itemSet import ItemSet
 from itemComponents import ItemComponents as Component
+import socket
+import threading
+
+HEADER  = 2
+PORT = 5050
+SERVER = "192.168.0.159"
+ADDR = (SERVER, PORT)
+FORMAT = 'utf-8'
+DISCONNECT_MESSAGE = "!DISCONNECT"
+
+socket = socket.socket()
+socket.bind(ADDR)
+
 
 ahk = AHK()
 
@@ -81,9 +94,10 @@ class Yuumi:
                     self.toBuy.append(i)
 
         setToBuy(ItemSet.itemSet)
-        
-        for i in self.toBuy:
-            print(i)
+
+        print("[STARTING] server is starting...")
+        thread = threading.Thread(target=start)
+        thread.start()
 
     #Status of abilities
     def hasP(self):
@@ -137,12 +151,8 @@ class Yuumi:
         for component in list(self.toBuy):
             time.sleep(0.1)
             if self.canPurchase(component):
-                print('purchased ' + component.name)
                 self.purchase(component)
             else:
-                print('cannot buy ' + component.name)
-                for j in self.toBuy:
-                    print (j)
                 self.closeShop()
                 break
 
@@ -186,6 +196,7 @@ class Yuumi:
     #Helper functions
     def openShop(self):
         ahk.key_press(key = 'p')
+        
 
     def closeShop(self):
         ahk.key_press(key = 'p')
@@ -202,7 +213,41 @@ class Yuumi:
         if convert.toRGB(self.ISINSHOP) == self.ISINSHOP_RGB:
             return True
         return False
+
+
+def hypnosis(msg):
+    input = msg[0]
+    coord = msg[1:].split(',')
+
+    print(f'Press {input} @ ({coord})')
+    ahk.mouse_move(coord)
+    #Because of this line, code doesn't work unless you use a separate computer
+    ahk.key_press(key = input)
         
+
+
+def handle_client(conn, addr):
+    print(f"[NEW CONNECTION {addr} connected.")
     
+    connected = True
+    while connected:
+        msg_length = conn.recv(HEADER).decode(FORMAT)
+        if msg_length:
+            msg_length = int(msg_length)
+            msg = conn.recv(msg_length).decode(FORMAT)
+            if msg == DISCONNECT_MESSAGE:
+                connected = False
+
+            hypnosis(msg)
+
+    conn.close()
 
 
+def start():
+    socket.listen(1)
+    print(f"[LISTENING] Server is listening on {SERVER}")
+    while True:
+        conn, addr = socket.accept()
+        thread = threading.Thread(target=handle_client, args=(conn, addr))
+        thread.start()
+        print(f"[ACTIVE CONNECTIONS] {threading.active_count() - 1}")
