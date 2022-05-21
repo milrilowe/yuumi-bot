@@ -24,4 +24,3 @@ yuumi = yuumi.Yuumi()
 
 # if __name__ == "__main__":
 #     main()
-     
