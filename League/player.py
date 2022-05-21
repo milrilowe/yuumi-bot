@@ -9,18 +9,18 @@ time.sleep(2)
 
 yuumi = yuumi.Yuumi()
 
-# def main():
-#     while True:
-#         time.sleep(2)
+def main():
+    while True:
+        time.sleep(2)
 
-#         if yuumi.inShop() :
-#             yuumi.shop()
+        if yuumi.inShop() :
+            yuumi.shop()
 
-#         yuumi.attach()
+        yuumi.attach()
 
-#         while(yuumi.isAttached()):
-#             yuumi.heal()
-#             yuumi.levelUp()
-
-# if __name__ == "__main__":
-#     main()
+        while(yuumi.isAttached()):
+            #yuumi.heal()
+            yuumi.levelUp()
+ 
+if __name__ == "__main__":
+    main()

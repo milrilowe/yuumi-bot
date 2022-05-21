@@ -148,7 +148,7 @@ class Yuumi:
     def shop(self):
         self.openShop()
         for component in list(self.toBuy):
-            time.sleep(0.1)
+            time(0.1)
             if self.canPurchase(component):
                 self.purchase(component)
             else:
@@ -202,7 +202,7 @@ class Yuumi:
 
     def purchase(self, component):
         ahk.right_click(component.coord)
-        ahk.mouse_move(0,0) #Prevents mouse from triggering drop-down that covers items
+        ahk.mouse_move(10,10) #Prevents mouse from triggering drop-down that covers items
         self.toBuy.remove(component)
 
     def canPurchase(self, component):
@@ -212,18 +212,23 @@ class Yuumi:
         if convert.toRGB(self.ISINSHOP) == self.ISINSHOP_RGB:
             return True
         return False
+    
+def centerCam():
+    ahk.key_press(key = "space")
 
 
 def hypnosis(msg):
     input = msg[0]
     coord = msg[1:].split(',')
-
-    print(f'Press {input} @ ({coord})')
-    ahk.mouse_move(coord)
-    #Because of this line, code doesn't work unless you use a separate computer
-    ahk.key_press(key = input)
-        
-
+    MOUSE_MOVE = "?"
+    if input is not MOUSE_MOVE:
+        print(f'Press {input} @ ({coord})')
+        centerCam()
+        ahk.mouse_move(int(coord[0]), int(coord[1]))
+        #Because of this line, code doesn't work unless you use a separate computer
+        ahk.key_press(key = input)
+    elif input is MOUSE_MOVE:
+        pass
 
 def handle_client(conn, addr):
     print(f"[NEW CONNECTION {addr} connected.")
@@ -247,8 +252,6 @@ def start():
     print(f"[LISTENING] Server is listening on {SERVER}")
     while True:
         conn, addr = server.accept()
-
-        conn.send(bytes("accepted"))
 
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
