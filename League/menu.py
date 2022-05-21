@@ -1,17 +1,17 @@
 import convert
 from ahk import AHK
 
-ahk = AHK()
+#NAVIGATE MENU IN-BETWEEN GAMES.  NOT TOTALLY SURE IF NEEDED, MIGHT BE DELEGATED TO PLAYER OR YUUMI
 
-red = (255, 0, 0)
+#JOIN INVITE
 
-coord = (0, 0)
+#SELECT ROLE
 
-inGame = False
+#ACCEPT QUEUE
 
-#Currently, will only run if I give red border
-if convert.toRGB(coord) == red:
-    inGame = True
+#CHAMP SELECT
+    #CHAMP TO BAN
 
-def inGame():
-    return inGame
+#AFTER-GAME SCREEN
+
+#WAY TO QUIT IF DUO LEAVES (IF PARTY OWNER -> QUIT)

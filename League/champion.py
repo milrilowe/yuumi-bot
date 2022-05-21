@@ -1,5 +1,6 @@
 import convert
 
+#Info about Champion icons above mini-map
 class Champion :
 
     CHAMPION_ICON_Y = 600
@@ -20,6 +21,10 @@ class Champion :
     missingHealth_RGB = (16, 16, 16)
 
 
+    '''
+    @param pos:
+                1, 2, 3, or 4 - will usually be 3 because adc is typically 3rd icon.  Maybe will implement way to set it while in champ select
+    '''
 
     def __init__(self, pos):     
         self.set(pos)
@@ -52,6 +57,9 @@ class Champion :
             self.x = None
             self.healthX = None
     
+    '''
+    Change self.missingHealth Y value constant to tune Yuumi's healing rate
+    '''
     def isMissingHealth(self):
         if convert.toRGB(self.missingHealth) == self.missingHealth_RGB:
             return True

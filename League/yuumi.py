@@ -10,17 +10,16 @@ import threading
 
 HEADER  = 2
 PORT = 5050
-SERVER = "192.168.0.159"
+SERVER = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 
-socket = socket.socket()
-socket.bind(ADDR)
+server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server.bind(ADDR)
 
 
 ahk = AHK()
-
 
 class Yuumi:
 
@@ -244,10 +243,13 @@ def handle_client(conn, addr):
 
 
 def start():
-    socket.listen(1)
+    server.listen(1)
     print(f"[LISTENING] Server is listening on {SERVER}")
     while True:
-        conn, addr = socket.accept()
+        conn, addr = server.accept()
+
+        conn.send(bytes("accepted"))
+
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
         print(f"[ACTIVE CONNECTIONS] {threading.active_count() - 1}")
